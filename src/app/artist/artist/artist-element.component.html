@@ -1,0 +1,10 @@
+<button type="button"
+        [routerLink]="['/artists', artist._id]"
+        class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
+  <span>
+    {{ artist.name }}
+  </span>
+  <span class="badge badge-primary badge-pill" style="color: black;">
+    {{ artist.genres?.join(', ') }}
+  </span>
+</button>
