@@ -4,7 +4,7 @@ import { ArtistService } from "../../_service/artist.service";
 import { Location } from "@angular/common";
 
 @Component({
-  selector: 'app-artist-form',
+  selector: 'app-artist-element-form',
   templateUrl: './artist-form.component.html',
   styleUrls: ['./artist-form.component.css']
 })
@@ -20,7 +20,8 @@ export class ArtistFormComponent implements OnInit {
 
 
   constructor(private activatedRoute: ActivatedRoute, private artistService: ArtistService,
-              private location: Location, private router: Router) { }
+              private location: Location, private router: Router) {
+  }
 
   ngOnInit(): void {
     const routeParams = this.activatedRoute.snapshot.paramMap;
@@ -93,8 +94,18 @@ export class ArtistFormComponent implements OnInit {
 
     this.artist.genres = this.artist.genres.split(",");
 
-    this.artist.artist_since = parseInt(this.artist.artist_since);
-    this.artist.monthly_listeners = parseInt(this.artist.monthly_listeners);
+    if (Number.isNaN(parseInt(this.artist.artist_since))) {
+      alert("artist_since must be a number")
+      return
+    } else
+      this.artist.artist_since = parseInt(this.artist.artist_since)
+
+
+    if (Number.isNaN(parseInt(this.artist.monthly_listeners))) {
+      alert("monthly_listeners must be a number")
+      return
+    } else
+      this.artist.monthly_listeners = parseInt(this.artist.monthly_listeners)
 
     if (this.artistIdFromRoute === "new") {
       this.artistService.postArtist(this.artist).subscribe((data: any) => {
@@ -108,19 +119,19 @@ export class ArtistFormComponent implements OnInit {
   }
 
   private hasEmptyFields(): boolean {
-    if (!this.artist.name){
+    if (!this.artist.name) {
       alert("name is required")
       return true;
     }
-    if (!this.artist.genres){
+    if (!this.artist.genres) {
       alert("genres is required")
       return true;
     }
-    if (!this.artist.artist_since){
+    if (!this.artist.artist_since) {
       alert("artist_since is required")
       return true
     }
-    if (!this.artist.monthly_listeners){
+    if (!this.artist.monthly_listeners) {
       alert("monthly_listeners is required")
       return true
     }

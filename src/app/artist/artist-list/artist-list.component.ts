@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ArtistService } from "../../_service/artist.service";
 
 @Component({
-  selector: 'app-artist-list',
+  selector: 'app-artist-element-list',
   templateUrl: './artist-list.component.html',
   styleUrls: ['./artist-list.component.css']
 })

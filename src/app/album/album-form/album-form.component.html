@@ -1,0 +1,89 @@
+<h1 *ngIf="album?.name">{{album?.name}}</h1>
+<h1 *ngIf="!album?.name || album?.name === ''" class="opacity-25">New Album</h1>
+
+<div class="row">
+  <div class="col-10">
+    <div class="form-group " >
+      <div class="row mb-1" *ngFor="let key of Object.keys(album)">
+        <div class="col-4">
+          <label>
+            <b>{{key}}</b>
+          </label>
+        </div>
+
+        <div class="col-7">
+          <input type="text"
+                 class="form-control form-control-sm"
+                 [(ngModel)]="album[key]">
+        </div>
+
+        <div class="col-1">
+          <button class="btn btn-danger w-100"
+                  style="font-size: 0.5rem;"
+                  (click)="onRemoveRow(key)"
+                  *ngIf="!isDefault(key)">
+            del
+          </button>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>
+            <b>Artist</b>
+          </label>
+        </div>
+
+        <div class="col-7">
+          <select class="form-select-sm w-100"
+                  [(ngModel)]="selectedArtistId"
+                  >
+            <option *ngFor="let artist of artists"
+                    [value]="artist._id"
+            >{{artist.name}}</option>
+          </select>
+        </div>
+
+      </div>
+      <div class="row mt-4">
+        <div class="col-4">
+          <input type="text"
+                 style="background-color: aliceblue; color: dimgrey"
+                 class="form-control form-control-sm"
+                 [(ngModel)]="newAttribute[0]"
+                 (keyup)="validateNewKey()"
+          >
+        </div>
+        <div class="col-7">
+          <input type="text"
+                 style="background-color: aliceblue; color: dimgrey"
+                 class="form-control form-control-sm"
+                 [(ngModel)]="newAttribute[1]">
+          <small id="emailHelp" class="form-text text-danger">{{ addError }}</small>
+
+        </div>
+        <div class="col-1">
+          <button class="btn btn-success w-100"
+                  style="font-size: 0.5rem;"
+                  (click)="onAddRow()"
+          >
+            add
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="col-2">
+    <button
+      (click)="onSave()"
+      class="btn btn-success w-100 mb-2">
+      Save
+    </button>
+    <button
+      (click)="onClose()"
+      class="btn btn-outline-danger w-100">
+      Close
+    </button>
+  </div>
+</div>
