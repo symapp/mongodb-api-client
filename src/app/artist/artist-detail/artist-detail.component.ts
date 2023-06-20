@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { ArtistService } from "../../_service/artist.service";
 import { ToastrService } from "ngx-toastr";
 
@@ -12,7 +12,8 @@ export class ArtistDetailComponent implements OnInit {
   artist: any;
   attributes: string[][] = [];
 
-  constructor(private activatedRoute: ActivatedRoute, private artistService: ArtistService, private toastr: ToastrService) { }
+  constructor(private activatedRoute: ActivatedRoute, private artistService: ArtistService,
+              private router: Router) { }
 
   ngOnInit(): void {
     const routeParams = this.activatedRoute.snapshot.paramMap;
@@ -34,4 +35,13 @@ export class ArtistDetailComponent implements OnInit {
   }
 
   protected readonly name = name;
+
+  deleteArtist() {
+    let r = confirm("Are you sure you want to delete " + this.artist.name + "?");
+    if (r) {
+      this.artistService.deleteArtist(this.artist._id).subscribe(() => {
+        this.router.navigate(["/artists"]);
+      });
+    }
+  }
 }
