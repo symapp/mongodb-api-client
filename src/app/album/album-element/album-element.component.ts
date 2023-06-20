@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ArtistService } from "../../_service/artist.service";
 
 @Component({
   selector: 'app-album-element',
@@ -7,10 +8,14 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class AlbumElementComponent implements OnInit {
   @Input() album: any;
+  artist: any;
 
-  constructor() { }
+  constructor(private artistService: ArtistService) { }
 
   ngOnInit(): void {
+    this.artistService.getArtist(this.album.artist_id).subscribe((artist: any) => {
+      this.artist = artist;
+    });
   }
 
 }

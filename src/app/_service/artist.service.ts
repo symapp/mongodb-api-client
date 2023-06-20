@@ -41,4 +41,10 @@ export class ArtistService {
       map((data: any) => data.data.data)
     )
   }
+
+  getAlbumsByArtist(id: string) {
+    return this.http.get(this.url + "/albums?artistId=" + id).pipe(
+      map((data: any) => data.data.data)
+    )
+  }
 }

@@ -1,10 +1,10 @@
-<nav class="navbar navbar-expand-lg navbar-light px-3 py-1">
+<nav class="navbar navbar-expand-lg px-3 py-1" >
   <div class="navbar-collapse" id="navbarSupportedContent">
     <div class="navbar-nav mr-auto">
-      <a class="nav-item nav-link" routerLink="artists">
+      <a class="nav-item nav-link" routerLink="artists" [ngClass]="router.url.includes('artist') ? 'active' : ''">
         Artists
       </a>
-      <a class="nav-item nav-link" routerLink="albums">
+      <a class="nav-item nav-link" routerLink="albums" [ngClass]="router.url.includes('album') ? 'active' : ''">
         Albums
       </a>
     </div>

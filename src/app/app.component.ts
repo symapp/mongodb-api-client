@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { Router } from "@angular/router";
+import { Component, Inject } from '@angular/core';
+import { Event, Router, RouterEvent } from "@angular/router";
+import { filter } from "rxjs";
+import { DOCUMENT } from "@angular/common";
 
 
 @Component({
@@ -9,5 +11,23 @@ import { Router } from "@angular/router";
 })
 export class AppComponent {
   title = 'MongoDbClient';
-  public isNavbarCollapsed: boolean = true;
+
+  constructor(public router: Router, @Inject(DOCUMENT) private document: Document) {
+    router.events.pipe(
+      filter((e: Event | RouterEvent): e is RouterEvent => e instanceof RouterEvent)
+    ).subscribe((e: RouterEvent) => {
+        if (e.url.includes("artist")) {
+          this.document.body.classList.add("artist");
+          this.document.body.classList.remove("album");
+          console.log("artist")
+        } else if (e.url.includes("album")) {
+          this.document.body.classList.add("album");
+          this.document.body.classList.remove("artist");
+        } else {
+          this.document.body.classList.remove("artist");
+          this.document.body.classList.remove("album");
+        }
+      }
+    )
+  }
 }

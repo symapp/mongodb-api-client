@@ -33,7 +33,6 @@ export class AlbumFormComponent implements OnInit {
 
     this.artistService.getArtists().subscribe((artists: any) => {
       this.artists = artists;
-      console.log(artists)
     });
 
     if (this.albumIdFromRoute == "new") {
@@ -44,10 +43,7 @@ export class AlbumFormComponent implements OnInit {
       this.albumService.getAlbum(this.albumIdFromRoute).subscribe((album: any) => {
         this.album = album;
         delete album._id;
-
-        this.artistService.getArtist(album.artist_id).subscribe((artist: any) => {
-          this.selectedArtistId = artist;
-        });
+        this.selectedArtistId = album.artist_id
 
         delete album.artist_id
       });
@@ -132,6 +128,8 @@ export class AlbumFormComponent implements OnInit {
       return
     }
     this.album.artist_id = this.selectedArtistId;
+
+    console.log(this.selectedArtistId)
 
     if (this.albumIdFromRoute === "new") {
       this.albumService.postAlbum(this.album).subscribe((data: any) => {

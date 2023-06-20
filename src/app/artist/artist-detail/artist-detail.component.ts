@@ -10,6 +10,7 @@ import { Location } from "@angular/common";
 })
 export class ArtistDetailComponent implements OnInit {
   artist: any;
+  albums: any = [];
   attributes: string[][] = [];
 
   constructor(private activatedRoute: ActivatedRoute, private artistService: ArtistService,
@@ -22,6 +23,10 @@ export class ArtistDetailComponent implements OnInit {
     this.artistService.getArtist(artistIdFromRoute).subscribe((artist: any) => {
       this.artist = artist;
       this.makeAttributeList()
+
+      this.artistService.getAlbumsByArtist(artistIdFromRoute).subscribe((albums: any) => {
+        this.albums = albums;
+      });
     });
   }
 

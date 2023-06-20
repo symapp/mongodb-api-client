@@ -27,4 +27,11 @@
   </div>
 </div>
 
+<div class="row">
+  <h2>Albums</h2>
+  <div class="list-group">
+    <app-album-element *ngFor="let album of albums" [album]="album"></app-album-element>
+  </div>
+  <p class="text-muted w-100" *ngIf="albums?.length < 1">No Albums :(</p>
+</div>
 
