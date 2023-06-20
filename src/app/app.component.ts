@@ -19,7 +19,6 @@ export class AppComponent {
         if (e.url.includes("artist")) {
           this.document.body.classList.add("artist");
           this.document.body.classList.remove("album");
-          console.log("artist")
         } else if (e.url.includes("album")) {
           this.document.body.classList.add("album");
           this.document.body.classList.remove("artist");

@@ -129,8 +129,6 @@ export class AlbumFormComponent implements OnInit {
     }
     this.album.artist_id = this.selectedArtistId;
 
-    console.log(this.selectedArtistId)
-
     if (this.albumIdFromRoute === "new") {
       this.albumService.postAlbum(this.album).subscribe((data: any) => {
         this.router.navigateByUrl("/albums/" + data.InsertedID)
